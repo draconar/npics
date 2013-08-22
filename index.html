@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="http://api.maps.nokia.com/2.2.4/jsl.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+    <style type="text/css">
+
+    html, body, div#main-container,  #mapContainer {    
+    height: 100%;
+}
+    
+#mapContainer {
+                width: 100%;                
+                outline: 1px solid purple;
+                min-height: 480px !important;      
+                position: relative;
+            }    
+#mapContainer  * {
+    position: absolute !important;
+}
+    
+</style>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="header-container">
+            <header class="wrapper clearfix">
+                <h1 class="title">h1.title</h1>
+                <nav>
+                    <ul>
+                        <li><a href="#">nav ul li a</a></li>
+                        <li><a href="#">nav ul li a</a></li>
+                        <li><a href="#">nav ul li a</a></li>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+
+
+        <div class="main-container">
+
+            
+                
+            <div class="main wrapper clearfix">
+                
+            <div id="uiContainer">Hi, I'm ui container</div>
+                <div id="mapContainer"><!--Hi, I'm map container--></div>               
+
+            </div> <!-- #main -->
+        </div> <!-- #main-container -->
+
+        <div class="footer-container">
+            <footer class="wrapper">
+                <h3>footer</h3>
+            </footer>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+
+        <script src="js/main.js"></script>
+        <script type="text/javascript" id="exampleJsSource">
+/*  Set authentication token and appid 
+*   WARNING: this is a demo-only key
+*   please register on http://api.developer.nokia.com/ 
+*   and obtain your own developer's API key 
+*/
+nokia.Settings.set("appId", "KZwV57zz8hw6gp6H2tl1"); 
+nokia.Settings.set("authenticationToken", "f0S_Nn42f7orgOrghHrbkA");
+
+// Get the DOM node to which we will append the map
+var mapContainer = document.getElementById("mapContainer");
+// Create a map inside the map container DOM node
+var map = new nokia.maps.map.Display(mapContainer, {
+    // initial center and zoom level of the map
+    components: [new nokia.maps.map.component.Behavior()],
+    center: [-23.54, -46.64],
+    zoomLevel: 10
+});
+
+
+if (nokia.maps.positioning.Manager) {
+    var positioning = new nokia.maps.positioning.Manager();
+
+    // Get the current position. If available, the first callback is run, 
+    // otherwise the second.
+    positioning.getCurrentPosition(
+        function (position) {
+            var coords = position.coords;
+            var marker = 
+                new nokia.maps.map.StandardMarker(coords);
+            var accuracyCircle = 
+                new nokia.maps.map.Circle(coords, coords.accuracy);
+            map.objects.addAll([accuracyCircle, marker]);
+            map.zoomTo(accuracyCircle.getBoundingBox(), false, "default");
+        },
+        // Handle errors (display message):
+        function (error) {
+            var errorMsg = "Location could not be determined: ";
+
+            // Determine what caused the error and show error message:
+            if (error.code == 1) 
+                errorMsg += "PERMISSION_DENIED";
+            else if (error.code == 2) 
+                errorMsg += "POSITION_UNAVAILABLE";
+            else if (error.code == 3) 
+                errorMsg += "TIMEOUT";
+            else errorMsg += "UNKNOWN_ERROR";
+
+            alert(errorMsg);
+        }
+    )
+}
+
+
+    //cf. http://developer.nokia.com/Community/Wiki/HERE_Maps_API_-_How_to_use_sprite_images_as_map_marker_icons
+    var imgDuck  = new nokia.maps.gfx.BitmapImage("http://farm3.staticflickr.com/2867/9559039929_cae085131f.jpg", null, 30, 30)
+
+var marker = new nokia.maps.map.Marker(
+    new nokia.maps.geo.Coordinate(-23.54, -46.64),{
+    title: "marker",
+    visibility: true,
+    icon: imgDuck,
+    // Offset the top left icon corner so that it's
+    // Centered above the coordinate
+    anchor: new nokia.maps.util.Point(32, 32),
+    width: 30,
+    height: 30
+});
+marker.enableDrag();
+map.objects.add(marker);
+
+/* We create a UI notecontainer for example description
+ * NoteContainer is a UI helper function and not part of the Nokia Maps API
+ * See exampleHelpers.js for implementation details 
+ */
+ var noteContainer = new NoteContainer({
+    id: "basicMapUi",
+    parent: document.getElementById("uiContainer"),
+    title: "Basic map example",
+    content:
+        '<p>This example shows how to create a basic map with few lines of code</p>'
+});
+
+
+        </script>
+
+    </body>
+</html>
