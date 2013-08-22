@@ -48,18 +48,21 @@ app.get('/tweets.json', function(request, response) {
 									        response.jsonp(err);
 										      } else {
 											              var tweets = [];
-
-												              JSON.parse(data).forEach(function(tweet) {
+/*if(data) {
+	JSON.parse(data).forEach(function(tweet) {
 														                tweets.push({
 																	            'id_str': tweet.id_str,
 																	            'created_at': tweet.created_at,
 																	            'text': tweet.text
 																	          });
 																        });
+}*/
+
+
 
 													              response.jsonp({
 															                'statusCode': 200,
-															                'data': tweets
+															                'data': JSON.parse(data)
 															              });
 														            }
 								    }
