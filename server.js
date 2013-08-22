@@ -13,7 +13,8 @@ app.get('/', function(request, response) {
 
 app.get('/tweets.json', function(request, response) {
 	  var query = {
-		   'geocode':'37.781157,-122.398720,1mi'
+		   'q': '',
+		   'geocode':'37.781157,-122.398720,100km'
 	  };
 
 	    var count = parseInt(request.param('count'));
