@@ -7,7 +7,10 @@ app.get('/', function(request, response) {
 	  response.send('Hello, world.');
 });
 
-app.listen(process.env.PORT);ar express = require('express');
+app.listen(process.env.PORT);
+
+/*
+var express = require('express');
 var app = express();
 
 app.configure(function(){
@@ -28,3 +31,4 @@ app.get('/', function(req, res){
 });
 
 app.listen(process.env.PORT || 3000);
+*/
