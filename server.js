@@ -36,7 +36,7 @@ app.get('/tweets.json', function(request, response) {
 				      url.format({
 					            protocol: 'https:',
 					            hostname: 'api.twitter.com',
-					            pathname: '/1.1/statuses/tweets.json',
+					            pathname: '/1.1/search/tweets.json',
 					            query: query
 					          }),
 				          process.env.TWITTER_ACCESS_TOKEN,
