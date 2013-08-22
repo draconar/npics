@@ -13,7 +13,7 @@ app.get('/', function(request, response) {
 
 app.get('/tweets.json', function(request, response) {
 	  var query = {
-		      'trim_user': '1'
+		   'geocode':'37.781157,-122.398720,1mi'
 	  };
 
 	    var count = parseInt(request.param('count'));
@@ -36,7 +36,7 @@ app.get('/tweets.json', function(request, response) {
 				      url.format({
 					            protocol: 'https:',
 					            hostname: 'api.twitter.com',
-					            pathname: '/1.1/statuses/user_timeline.json',
+					            pathname: '/1.1/statuses/tweets.json',
 					            query: query
 					          }),
 				          process.env.TWITTER_ACCESS_TOKEN,
