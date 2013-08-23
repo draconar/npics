@@ -2,8 +2,11 @@
   "name": "npics",
   "version": "0.0.1",
   "dependencies": {
-    "express": "3.1.x",
-    "oauth": "~0.9.10"
+    "express": "~3.1.2",
+    "oauth": "~0.9.10",
+    "ntwitter": "~0.5.0",
+    "consolidate": "~0.9.1",
+    "socket.io": "~0.9.16"
   },
   "engines": {
     "node": "0.10.x",
