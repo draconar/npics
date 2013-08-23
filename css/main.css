@@ -154,20 +154,50 @@ nav a:hover {
 }
 
 /* ==========================================================================
-   Author's custom styles
+   Author's custom styles (DRACONAR)
    ========================================================================== */
 
+html, body, div#main-container,  #mapContainer {    
+    height: 100%;
+}
 
+#mapContainer {
+    width: 55%;                
+    outline: 1px solid purple;
+    min-height: 480px !important;      
+    position: relative;
+    margin-left: 5px;
+    float: left;
+}    
+#mapContainer  * {
+    position: absolute !important;
+}
+#local-tweet-container {
+    margin-top: 1em;
+    min-height: 400px;
+    max-height: 400px;
+    overflow: hidden;   
+    font-size: small;   
+}
+.tweets {
+    box-shadow: inset 1px 2px 1px 10px rgba(0, 0, 0, 0.06);
+    font-size: x-small;
+}
 
+@media (max-width: 768px) {
+    #mapContainer {
+        width: 100%;
+        clear: both;
+    }
 
+    #local-tweet-container {
+        margin-top: 45em;
+    }
 
+}
 
-
-
-
-
-
-
+ul { list-style:none;}
+ul.tweets li {display: block; height: 47px; width: 100%; overflow: hidden}}
 
 
 
